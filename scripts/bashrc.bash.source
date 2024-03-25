@@ -6,6 +6,7 @@
 # © 2014 / CC. Pattern by Sosi.
 # Based on my gpu-experimentations/provisioning_scripts/refresh-ssh-agent.bash_source
 
+echo -n "Startup: Running startup script: "
 # Self reflection:
 realpath scripts/bashrc.bash.source
 
@@ -15,10 +16,10 @@ if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
     exit 1
     # return  # 'return' only allows bash, noit source
 fi
-echo "oh no"
-# exit
+
 
 ###### VPS/VM/user
+echo "Startup: Setting up the terminal"
 
 # export HISTCONTROL=ignoredups:erasedups
 # PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
@@ -28,6 +29,7 @@ echo "oh no"
 # todo: nvm (if needed)
 
 ###### Development (Developing NeoPiler)
+echo "Startup: Setting up the dev environment"
 
 # runs everytime
 export PATH=$PATH:/usr/local/go/bin
@@ -39,3 +41,4 @@ eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/github_rsa
 
 ###### Runtime (Using NeoPiler)
+echo "Startup: Setting up the runtime environment"
