@@ -29,3 +29,10 @@ antlr4
 # check wasted space, resources
 docker images
 docker ps -a
+
+set -ex
+
+# important
+conan profile list
+
+--profile=myprofile

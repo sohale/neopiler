@@ -214,3 +214,15 @@ Next thing to solve:
 ```
 ERROR: Error loading conanfile at '/home/ephemssss/neopiler/conanfile.py': Error while initializing options. The usage of package names `antlr4:shared` in options is deprecated, use a pattern like `antlr4/*:shared` instead
 ```
+Simply added a `/*`
+
+### Clang installation
+
+Let's see: https://clang.llvm.org/get_started.html
+
+Why profile file is not created?
+why I cannot cfreate it locally?
+
+Why Adjust my clang version?
+
+`compiler.version=12`

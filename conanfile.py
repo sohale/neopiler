@@ -87,17 +87,19 @@ class Neopiler(ConanFile):
 
    # not sure if used in Conan 2
    def configure(self):
-      print("IN CONAN 2 too?")
+      print("In Conan 2 too? Yes. Confirmed")
       if self.settings.compiler == "clang":
          # Compiler flags?
          self.settings.compiler.version = "12"
          self.settings.compiler.libcxx = "libc++"
          self.settings.compiler.cppstd = "20"
+      elif self.settings.compiler == "gcc":
+        raise NotImplementedError("GCC is discouraged here. Let's use Clang for now")
       else:
         raise NotImplementedError("Unsupported compiler, we use Clang here")
 
-      # assert self.settings.os == "Linux", "Only Linux is supported"
-      # assert self.settings.build_type == "Debug", "Only Debug is supported"
+      assert self.settings.os == "Linux", "Only Linux is supported for now"
+      assert self.settings.build_type == "Debug", "Only Debug is supported for now"
       # assert self.settings.arch == "x86_64", "Only x86_64 is supported"
 
 
