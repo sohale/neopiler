@@ -103,3 +103,67 @@ brew install git-cola
 
 #### (optional) Terraform
 todo: also terraform.
+
+
+#### Conan: cont.
+OK now conan is intalled, and I also have a conanfile.py. But It needs to create a profile.
+```
+conan profile detect
+```
+Output:
+```txt
+detect_api: Found gcc 11
+detect_api: gcc>=5, using the major as version
+detect_api: gcc C++ standard library: libstdc++11
+```
+then
+```txt
+Detected profile:
+[settings]
+arch=x86_64
+build_type=Release
+compiler=gcc
+compiler.cppstd=gnu17
+compiler.libcxx=libstdc++11
+compiler.version=11
+os=Linux
+```
+
+Create & see profiles:
+```
+conan profile detect
+
+??conan profile list default --detec
+
+conan profile list
+conan profile show
+conan profile path default
+```
+
+and finally: (not that I have my conan profile: "default")
+```
+conan install .
+```
+which shows but follows with some errors (not shown)
+```txt
+======== Input profiles ========
+Profile host:
+[settings]
+arch=x86_64
+build_type=Release
+compiler=gcc
+compiler.cppstd=gnu17
+compiler.libcxx=libstdc++11
+compiler.version=11
+os=Linux
+
+Profile build:
+[settings]
+arch=x86_64
+build_type=Release
+compiler=gcc
+compiler.cppstd=gnu17
+compiler.libcxx=libstdc++11
+compiler.version=11
+os=Linux
+```
