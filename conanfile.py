@@ -20,8 +20,15 @@ class Neopiler(ConanFile):
    # generators = "cmake", "gcc", "txt"  # todo: make it clang
    generators = "cmake"
 
-   default_options = {"antlr4:shared": True, "antlr4-cppruntime:shared": True}
+   default_options = {
+      "antlr4:shared": True,
+      "antlr4-cppruntime:shared": True,
+   }
 
+   def configure(self):
+      if self.settings.compiler == "clang":
+         self.settings.compiler.version = "12"
+         self.settings.compiler.libcxx = "libstdc++11"  # Or use "libc++" depending on your preference
 
    def imports(self):
       pass
