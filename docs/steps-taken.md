@@ -200,3 +200,17 @@ Apparently you need to look into:
 git clone https://github.com/conan-io/examples2.git
 
 ok, let's see
+
+
+todo: Conan in subfolder
+https://github.com/conan-io/examples2/blob/main/examples/conanfile/layout/conanfile_in_subfolder/conan/conanfile.py
+
+
+ok. import CMake is deprecated in Conan 2
+
+now `conan install .` works. Almost.
+
+Next thing to solve:
+```
+ERROR: Error loading conanfile at '/home/ephemssss/neopiler/conanfile.py': Error while initializing options. The usage of package names `antlr4:shared` in options is deprecated, use a pattern like `antlr4/*:shared` instead
+```
