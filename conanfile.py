@@ -15,6 +15,11 @@ from conan import ConanFile
 #from conans import ConanFile
 #from conans import ConanFile, CMake
 
+# Cool stuff available in Conan 2
+from conan.tools.cmake import CMake  # constructor
+from conan.tools.cmake import cmake_layout  # function
+
+
 class Neopiler(ConanFile):
 
    name = " NeoPiler"

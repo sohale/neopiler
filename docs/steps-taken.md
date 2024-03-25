@@ -231,3 +231,51 @@ Why Adjust my clang version?
 Comments should be on separate lines
 
 Profile can be specific in cli arg `--profile`, see build.bash
+
+
+#### cmake_layout issue:
+
+What is it about?
+
+What is the workflow?
+
+Why does conanfile have a layout?
+```
+[layout]
+cmake_layout
+```
+
+### Conan 2
+* **Layout**: the directory structure of the project.
+* `cmake_layout`: function that defines the layout. In terms of directories for source, build, and package.
+
+* Workflow:
+* Installation of Conan (and pulling the repo)
+* Seed the **profile** (may be in home directory; not pushed?)
+* The **Conan-File** execusion
+   * Includes parametrising
+* The **configure**
+* The **layout** step
+* The **generate** step
+* The **configure** step
+* The **build** step (compiles into binaries)
+   * Includes "post-build" executables (e.g. for debugging/demonstrating)
+   * Involves, CMake, which in turn, involves make, ninja, etc
+* The **package** step
+   * Copying binaries, header, etc
+   * from the "build directory" to the "package directory"
+   * assembling all the components into package
+   * package project side
+   * how to "produce" the package (as opposed to consume: see below)
+   * creating the package content, vs "usage"
+* The **package-info**
+   * package consumer/user ('s project) side
+   * how to "consume" the package
+   * What info? library names, compile definitions, header (.hxx) files
+   * "usage" versus "creating the package content" (in "package" as verb)
+
+Other Conan2 concepts:
+* requirements ?
+* build of dependencies (from source, etc): The "transitivity" in package management (when there is a hierarchy of packages)
+* compile definitions
+* etc
