@@ -51,8 +51,8 @@ class Neopiler(ConanFile):
 
    default_options = {
 
-      "antlr4:shared": True,
-      "antlr4-cppruntime:shared": True,
+      "antlr4/*:shared": True,
+      "antlr4-cppruntime/*:shared": True,
 
       "fPIC": True,
       "shared": False,
