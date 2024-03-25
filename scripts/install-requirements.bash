@@ -1,4 +1,4 @@
-# install things
+# install things. install requiremetns. preparation (of the environment)
 
 sudo apt install default-jdk
 java -version
