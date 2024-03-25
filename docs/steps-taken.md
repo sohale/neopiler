@@ -18,5 +18,13 @@ Outcome: `openjdk version "11.0.22" 2024-01-16. OpenJDK Runtime Environment (bui
 
 #### Set up Conan
 ```bash
-pip install conan
+# pip install conan  # According to: https://docs.conan.io/2/installation.html
+```
+but no. instead:
+```bash
+sudo apt-get install pipx
+pipx ensurepath
+# restart terminal here (?)
+pipx install conan
+conan  # test
 ```
