@@ -1,3 +1,14 @@
+/* An ANTLR file
+ for C/C++ string literals
+ Surrounded by:
+    These are inside a pair of " (only)
+    no character literals (using `'`)
+    String prefixed are outside this context: u8"", u, U, R"",
+
+
+ ANTLR line comment is //
+ ANTLR block comment:
+*/
 
 grammar CppString; // CString
 
