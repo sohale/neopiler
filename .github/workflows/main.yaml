@@ -1,0 +1,8 @@
+steps:
+- uses: actions/checkout@v2
+- name: Install Conan
+  run: pip install conan
+- name: Install dependencies
+  run: conan install .
+- name: Build
+  run: mkdir build && cd build && cmake .. && make
