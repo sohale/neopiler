@@ -10,12 +10,15 @@ docker run --rm hello-world
 java -version
 go version
 conan
+# Does it also check whether vonan install is done? no.
 
 # pipx
 # go version
 
 act
-ls -1 ./install/act  # not necessarily here
+act --list
+# act --help
+ls -1 ./install/act >/dev/null || echo "ERROR: no ./install/act "  # not necessarily here. Only check if it exists
 # also: act  antlr4-cpp-runtime-4.13.1-source.zip  go1.22.1.linux-amd64.tar.gz
 
 antlr4
