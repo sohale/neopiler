@@ -1,10 +1,11 @@
-# Add `source`-ing this to your `~/.bashrc`
+# Startup: Add as a `source` line runing this to your `~/.bashrc`
 
 # Pattern by Sosi, CC / © 2014
 # © 2014 / CC. Pattern by Sosi.
 # Based on my gpu-experimentations/provisioning_scripts/refresh-ssh-agent.bash_source
 
-# To run only as `source`, not `bash`
+
+# Guard. To run only as `source`, not `bash`
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
     echo "Error: This must be run only using 'source', and not 'bash'. Please run with:    source ${BASH_SOURCE[0]}"
     exit 1
@@ -13,6 +14,16 @@ fi
 echo "oh no"
 # exit
 
+###### VPS/VM/user
+
+# export HISTCONTROL=ignoredups:erasedups
+# PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
+# export HISTSIZE=100000
+# export HISTFILESIZE=20000
+
+# todo: nvm (if needed)
+
+###### Development (Developing NeoPiler)
 
 # runs everytime
 export PATH=$PATH:/usr/local/go/bin
@@ -22,3 +33,5 @@ export PATH=$PATH:/usr/local/go/bin
 eval "$(ssh-agent -s)"
 
 ssh-add ~/.ssh/github_rsa
+
+###### Runtime (Using NeoPiler)
