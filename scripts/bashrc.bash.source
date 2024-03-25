@@ -1,9 +1,13 @@
 # Startup: Add as a `source` line runing this to your `~/.bashrc`
+# The startup-bashrc.source source-script
+# Add: source /home/ephemssss/neopiler/scripts/bashrc.bash.source
 
 # Pattern by Sosi, CC / © 2014
 # © 2014 / CC. Pattern by Sosi.
 # Based on my gpu-experimentations/provisioning_scripts/refresh-ssh-agent.bash_source
 
+# Self reflection:
+realpath scripts/bashrc.bash.source
 
 # Guard. To run only as `source`, not `bash`
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
