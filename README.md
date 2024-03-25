@@ -3,6 +3,7 @@
 
 A Toolkit?
 A Compiler?
+The "tool", the "target" (shall borrow from ANTLR terminology?)
 
 ### Folders:
 
@@ -24,7 +25,28 @@ A Compiler?
 * a split (for separating )
 * a join (combining separate concerns)
 
+* subsyntax: See toolkits
+* blocks (subsyntax zones)
+* "host language": is neopiler (aka neopile, neo, neop) itself
 
 ### Some language keywords:
 (Not final)
    * `code`, `data`
+
+### Toolkits
+User can define new (sub-) syntaxes.
+
+Toolkits for a hierarchy.
+They will add it as a hierarchy folder in ./toolkit. They may need to provide ANTLR file, etc. It will be added to the main toolkit-repository (keep int he same repo). But they may add their own custom ones too.
+
+Example: (see `examples/sample1/sample1.neo` )
+```
+use syntax css.cstring
+```
+
+They can use these for syntax highlighting, Language Server, etc.
+The usecase is DSL, literals, ic, but much more.
+Even potentially adding (or selecting) core languages in their repo.
+
+These sublanguages are used in blocks (aka zones).
+Each has a detector / detector pattern in the host language (.neo).
