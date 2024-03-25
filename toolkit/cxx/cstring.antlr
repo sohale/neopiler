@@ -1,0 +1,36 @@
+grammar CString;
+
+// Entry point that matches a string without the surrounding quotes
+string
+    : STRING_CONTENT* EOF
+    ;
+
+// Match string content or escape sequences
+STRING_CONTENT
+    : ESCAPE_SEQUENCE
+    | ~('\\'|'\r'|'\n')+
+    ;
+
+// Define common C/C++ escape sequences
+ESCAPE_SEQUENCE
+    : '\\' ('0'          // Null character
+          | 'n'         // Newline
+          | 'r'         // Carriage return
+          | 't'         // Horizontal tab
+          | '"'         // Double quote
+          | '\''        // Single quote
+          | '\\'        // Backslash
+          | 'b'         // Backspace
+          | 'f'         // Formfeed
+          | 'v'         // Vertical tab
+          | 'a'         // Alert (bell)
+          | ('x' HEX_DIGIT HEX_DIGIT?) // Hexadecimal byte value
+          | ('u' HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT) // Unicode 4 digits
+          | ('U' HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT) // Unicode 8 digits
+          )
+    ;
+
+fragment HEX_DIGIT : [0-9a-fA-F] ; // Hexadecimal digit
+
+// Skip whitespace except new lines, to prevent them from being included in STRING_CONTENT
+WS : [ \t]+ -> skip ;
