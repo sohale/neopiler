@@ -1,4 +1,5 @@
-grammar CString;
+
+grammar CppString; // CString
 
 // Entry point that matches a string without the surrounding quotes
 string
@@ -11,7 +12,7 @@ STRING_CONTENT
     | ~('\\'|'\r'|'\n')+
     ;
 
-// Define common C/C++ escape sequences
+// Define C/C++ escape sequences including octal and unicode
 ESCAPE_SEQUENCE
     : '\\' ('0'          // Null character
           | 'n'         // Newline
@@ -24,10 +25,15 @@ ESCAPE_SEQUENCE
           | 'f'         // Formfeed
           | 'v'         // Vertical tab
           | 'a'         // Alert (bell)
+          | OCTAL_ESCAPE_SEQUENCE // Octal byte value
           | ('x' HEX_DIGIT HEX_DIGIT?) // Hexadecimal byte value
           | ('u' HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT) // Unicode 4 digits
           | ('U' HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT) // Unicode 8 digits
           )
+    ;
+
+OCTAL_ESCAPE_SEQUENCE
+    : [0-7] [0-7]? [0-7]? // 1 to 3 octal digits
     ;
 
 fragment HEX_DIGIT : [0-9a-fA-F] ; // Hexadecimal digit
