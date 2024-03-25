@@ -1,2 +1,24 @@
+# Add `source`-ing this to your `~/.bashrc`
+
+# Pattern by Sosi, CC / © 2014
+# © 2014 / CC. Pattern by Sosi.
+# Based on my gpu-experimentations/provisioning_scripts/refresh-ssh-agent.bash_source
+
+# To run only as `source`, not `bash`
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    echo "Error: This must be run only using 'source', and not 'bash'. Please run with:    source ${BASH_SOURCE[0]}"
+    exit 1
+    # return  # 'return' only allows bash, noit source
+fi
+echo "oh no"
+# exit
+
+
 # runs everytime
 export PATH=$PATH:/usr/local/go/bin
+
+# Fix SSH access issue for for git
+
+eval "$(ssh-agent -s)"
+
+ssh-add ~/.ssh/github_rsa
