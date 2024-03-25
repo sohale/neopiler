@@ -58,6 +58,17 @@ cd act
 make test
 make install
 ```
+The `make isntall` will need access to '/usr/local/bin/act'. You can, instead of `sudo`ing it,
+```bash
+sudo touch /usr/local/bin/act
+sudo chown  $USER:$USER /usr/local/bin/act
+make install
+```
+The `make test` fails. Not sure, it might need Docker, which requires certain permissions.
+```bash
+sudo usermod -aG docker $USER
+
+```
 
 #### Install Golang
 Installing *go* (Golang) for "Act":
@@ -75,7 +86,10 @@ go version
 ```
 Outcome: `go version go1.22.1 linux/amd64`
 
-3. Add go to PATH permanently
+3. Add go to PATH permanently. Add this to your ~/.bashrc:
+```bash
+source .../scripts/bashrc.bash.source
+```
 
 4. (optional step): Then, use managed install: https://go.dev/doc/manage-install
 
