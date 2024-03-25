@@ -6,7 +6,14 @@ poco/1.10.1
 cmake
 """
 
-from conans import ConanFile, CMake
+from conan import ConanFile
+
+# fails:
+from conan import CMake
+
+#from conans import CMake
+#from conans import ConanFile
+#from conans import ConanFile, CMake
 
 class Neopiler(ConanFile):
 

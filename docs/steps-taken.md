@@ -167,3 +167,36 @@ compiler.libcxx=libstdc++11
 compiler.version=11
 os=Linux
 ```
+
+Create a conan profile. (See ...)
+
+By this? (only once. diff)
+```bash
+conan profile detect --force
+conan profile path default
+```
+
+Then:
+Sorry, it seems I need my separate venv
+```bash
+python3 -m venv install/venv-neopiler
+source ./install/venv-neopiler/bin/activate
+pip install conan
+```
+
+# Conan 2.0
+Ok, it seems my sample conanfile s were from Conan 1. But I am (and should be) using Conan 2.
+
+
+conan install . --output-folder=build --build=missing
+
+What is `CMAKE_TOOLCHAIN_FILE`?
+```
+$ cmake .. -G "..." -DCMAKE_TOOLCHAIN_FILE="conan_toolchain.cmake"
+$ cmake --build . --config Release
+```
+
+Apparently you need to look into:
+git clone https://github.com/conan-io/examples2.git
+
+ok, let's see

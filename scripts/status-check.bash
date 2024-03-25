@@ -9,11 +9,14 @@ docker run --rm hello-world
 
 java -version
 go version
-conan
-# Does it also check whether vonan install is done? no.
+conan --version
+# Does it also check whether Conan install is done? no.
 
-# pipx
-# go version
+# optional
+pipx --version
+pipx list  # should contain conan. eg. package conan 2.2.2, installed using Python 3.10.12
+# Note: venvs are in /home/ephemssss/.local/pipx/venvs (it says)
+
 
 act
 act --list
