@@ -226,3 +226,8 @@ why I cannot cfreate it locally?
 Why Adjust my clang version?
 
 `compiler.version=12`
+
+#### On profiles
+Comments should be on separate lines
+
+Profile can be specific in cli arg `--profile`, see build.bash
