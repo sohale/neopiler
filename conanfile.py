@@ -100,6 +100,8 @@ class Neopiler(ConanFile):
       print("In Conan 2 too? Yes. Confirmed")
       if self.settings.compiler == "clang":
          print('Yes, Clang')
+         # assert False, "Sorry, Clang did not work here. Let's use gcc for now"
+
          # Compiler flags?
          self.settings.compiler.version = "16"
          #  warning: "Libc++ only supports Clang 16 and later" ( /usr/include/c++/v1/__config:48:8 )
@@ -115,7 +117,8 @@ class Neopiler(ConanFile):
         raise NotImplementedError("Unsupported compiler, we use Clang here")
 
       assert self.settings.os == "Linux", "Only Linux is supported for now"
-      assert self.settings.build_type == "Debug", "Only Debug is supported for now"
+      # Both should work
+      # assert self.settings.build_type == "Debug", "Only Debug is supported for now"
       # assert self.settings.arch == "x86_64", "Only x86_64 is supported"
 
 
