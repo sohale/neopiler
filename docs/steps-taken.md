@@ -289,13 +289,20 @@ This could be useful, but already fine:
 ```bash
 sudo apt-get install clang
 sudo apt-get reinstall clang
-``
+```
 
-This was Missing:
+This was Missing: (fixed)
 ```bash
 export CC=/usr/bin/clang
 export CXX=/usr/bin/clang++
 ```
+
+Note:
+```bash
+conan install . --output-folder=build --profile=./conan/linux-clang-20-debug.profile    --build=missing
+```
+
+Next issue: Standard libary is missing? `/usr/include/c++/v1/new:218:40: error: 'std' is not a class, namespace, or enumeration`
 
 ### Conan 2
 * **Layout**: the directory structure of the project.
