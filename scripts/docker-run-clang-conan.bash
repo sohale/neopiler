@@ -10,6 +10,7 @@ docker run \
       \
    neopiler_clang17_with_conan2:latest \
       \
+      bash -c '
       env && echo && \
       sudo rm  -f /usr/bin/g++ /usr/bin/gcc && \
       ls -altH conan/linux-clang-20-debug.profile && \
@@ -17,7 +18,12 @@ docker run \
       --output-folder=build \
       --profile:build=./conan/linux-clang-20-debug.profile \
       --profile:host=./conan/linux-clang-20-debug.profile \
-      --build=missing
+      --build=missing \
+      && \
+      echo "hi2" && \
+      bash
+      '
+
 
 exit
 #      bash \

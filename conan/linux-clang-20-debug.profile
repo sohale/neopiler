@@ -11,5 +11,5 @@ compiler.version=17
 # This was the culprit!!
 # compiler.libcxx=libc++
 
-compiler.cppstd=17
+compiler.cppstd=20
 build_type=Debug

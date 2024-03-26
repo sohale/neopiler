@@ -936,3 +936,17 @@ This was the culprit!!
 ```
 compiler.libcxx=libc++
 ```
+
+Clanup:
+```bash
+conan remove "*" -f
+
+conan remove "antlr4-cppruntime/4.13.1" -f
+
+conan remove "antlr4-cppruntime/4.13.1" -b -p -f
+
+conan remove "antlr4-cppruntime/4.13.1" -b -p
+```
+-b option removes the build folder, -p removes the package folder, and -f forces the action without confirmation.
+
+Oh no, it does not run that in the container!
