@@ -392,6 +392,9 @@ Clang with `libc++` versus Clang with `libstdc++`:
 11. motivated by the desire to create a library that leverages LLVM's strengths
    * including its optimizer and code generation capabilities.
 
+12. Only clang separates ABI from the rest: `libc++-dev` `libc++abi-dev` (see motivation for separating ABI in stdlib packaging)
+13. They did a major refactoring (see it this way)
+
 Compatibility:
 * Compatibility with libstdc++ is *maintained* to ensure that Clang can be used in environments where libstdc++ is prevalent or required.
 
@@ -404,7 +407,7 @@ In other words,
 * header-only components (templates, inline functions)
 * components that require linking (compiled binary code, like the standard library's implementation of IO operations)
 
-##### apt-get artifacts
+##### Packaging: apt-get artifacts
 Artifacts:
 * `libc++-dev`
 * `libc++abi-dev`
@@ -417,10 +420,27 @@ Difference:
 * `libc++-dev`: provides the "headers and development files" for libc++.
 * `libc++abi-dev` : implements the low-level ABI
 
-###### Suffix `-dev`
+###### Package naming
+* Minor notes on package naming:
+   * gcc has a verion number `libstdc++-<version>-dev` (for GCC 9, it would be `libstdc++-9-dev`)
+   * but Clang's does not have a verison name (see above).
+   * (Also see C packages below; `libc6-dev`)
+   * See below for `-dev` suffix
+   * The Clang's compiler and stdlib development are "tightly integrated and versioned together as part of the LLVM project".
+      * "are expected to be managed together rather than piecemeal"
 
+* Non-Debian package managers (dnf, pacman, yum, zypper) use differnt package names: `glibc-devel` (gcc), `libcxx-devel`, `libcxxabi-devel` (clang), etc
+   * Fedora and CentOS (Red Hat) use `yum` or `dnf`, Arch Linux uses `pacman`, openSUSE uses `zypper`.
+
+* The package `build-essential` includes gcc, g++, make
+   * What is the difference between gcc vs g++? you mentioned them in the same list (as alternatives?) I always get confused about g++, gcc, and other namings of the compiler binary for gcc C/C++/etc compiler(s).
+
+* On suffix `-dev` in apt-get:
 Is the `-dev` suffix for compiling software that "depends on the library"? or to develop the library itself? (Yes, verified). The development of library itself will not need `apt-get` packages.
 Verified: "They are intended for developers building software that depends on these libraries, not for the development of the libraries themselves."
+
+* Reminder: `dev` is specific to Clang
+* Nice way to say it: Clang's approach to "standard library packaging"
 
 ###### Separate package for the ABI
 * "an ABI layer": ABI as a layer added, for e.g. `libc++`.
@@ -434,6 +454,14 @@ Verified: "They are intended for developers building software that depends on th
 Separate packages for ABI:
 * to "update" or "configure" the ABI support "independently" from the main library development files.
 
+ABI notes:
+* name mangling (only C++)
+* exception handling (only C++)
+* ABI concerns "pre-compiled" binaries (ABI stability and compatibility)
+* Separation of ABI is not common for C libraries.
+   * C ABI issues are less complex
+      * simpler compilation model of C
+      * C's lack of features like name mangling.
 
 ##### C vs C++ standard libraries:
 * C++ standard library is compatible at level of interface (and ABI), but the implementation should be different to C (to verify). It seems there is partial (degrees of) ABI-compatibility.
@@ -457,6 +485,25 @@ Separate packages for ABI:
 * memory layouts = ? Why should they matter for ABI?
 
 What if I miss that ABI package? ( `libc++abi-dev` )
+
+* C packages:
+Package name: `libc6-dev`
+Name `glibc` (GNU C Library)
+
+* Only Clang separates ABI from the rest: `libc++-dev` `libc++abi-dev`
+* Clang and GCC can both use `glibc`
+* The ABI-specific package (libc++abi-dev) is only about C++.
+
+##### Commands
+* `gcc` compile multiple languages covered by GCC
+   * used when compiling C code.
+   * ability to compile multiple languages (including C++).
+   * Does not automatically includes the C++ standard library
+   * You can use `-lstdc++`
+
+* `g++` Specifically for C++.
+   * automatically includes the C++ standard library
+   * specifically, `libstdc++`
 
 ##### Side notes:
 
