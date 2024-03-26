@@ -846,3 +846,27 @@ RUN \
 ```
 
 sudo: you do not exist in the passwd database
+
+I can use
+```
+   apt-get install -y apt-fast && \
+```
+But a conundrum:
+Needs `apt-get update` before any ... I see!
+
+At least, later ones will be fast. But cannot apt-fast before that.
+
+In clang:17
+Available: wget
+Not available: curl
+
+Alternative: manually install apt-fast
+https://github.com/ilikenwf/apt-fast
+
+OK, An image, only with`apt-get update`: absolutely nothing else
+RUN apt-get update
+
+Nevertheless, `E: Unable to locate package apt-fast`
+
+ok, I need to add this too:
+debconf: delaying package configuration, since apt-utils is not installed

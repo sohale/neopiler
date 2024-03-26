@@ -3,6 +3,13 @@ FROM silkeh/clang:latest
 
 # The silkeh/clang image is based on debian:buster-slim
 
+# Available: wget
+# Not available: curl
+# Needs apt-get update before any ... I see!
+
+# An image, only with`apt-get update`: absolutely nothing else
+RUN apt-get update && apt-get install -y apt-utils
+
 # RUN apt-get update && apt-get install -y bash
 
 # not:    pip install --user pipx && \
@@ -14,10 +21,13 @@ FROM silkeh/clang:latest
 # debconf: delaying package configuration, since apt-utils is not installed
 
 RUN \
-   apt-get update && \
    apt-get install -y bash && \
    apt-get install -y apt-utils && \
+   apt-get install -y apt-fast && \
    :
+# At least, later ones will be fast. But cannot apt-fast before that.
+# Alternative: manually install apt-fast
+# https://github.com/ilikenwf/apt-fast
 
 # separate sudo layer, for easy enabling and disabling sudo?
 RUN \
