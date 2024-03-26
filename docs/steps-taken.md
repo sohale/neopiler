@@ -577,3 +577,18 @@ Other Conan2 concepts:
 * build of dependencies (from source, etc): The "transitivity" in package management (when there is a hierarchy of packages)
 * compile definitions
 * etc
+
+
+### stdlib for antlr
+Back to the real world.
+
+oh, see this:
+warning: "Libc++ only supports Clang 16 and later"
+
+while
+clang --version
+
+Ubuntu clang version 14.0.0-1ubuntu1.1
+Target: x86_64-pc-linux-gnu
+Thread model: posix
+InstalledDir: /usr/bin

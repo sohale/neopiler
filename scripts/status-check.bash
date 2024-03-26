@@ -35,4 +35,8 @@ set -ex
 # important
 conan profile list
 
---profile=myprofile
+# --profile=./conan/linux-clang-20-debug.profile
+
+
+clang --version
+# Must be at least 16, for ANTLR ( antlr4-cppruntime/4.13.1 )
