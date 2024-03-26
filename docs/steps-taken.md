@@ -703,3 +703,146 @@ docker run --rm -it \
 
 
 ```
+
+Oops, I will need Conan too, inside the container:
+
+In search of a Clang 17 with Conan 2:
+https://github.com/conan-io/conan-docker-tools
+https://github.com/conan-io/conan-docker-tools/tree/master/modern
+wow, containers for Jenkins too?
+
+? https://github.com/conan-io/conan-docker-tools/blob/master/modern/clang/Dockerfile
+
+Legacy Conan 1: (e.g. conanio/clang14-ubuntu16.04 (Clang 14) x86_64)
+https://docs.conan.io/1/howtos/run_conan_in_docker.html#docker-conan
+
+Conan? https://hub.docker.com/u/conanio
+
+Search: https://hub.docker.com/search?q=conan%20clang
+
+`chainguard/clang` :  zero CVE
+   * (Build, ship and run secure software with Chainguard's low-to-zero CVE container images).
+   * CVE: Common Vulnerabilities and Exposures
+
+conan server ! docker image
+
+#### Chainguard's image
+Ok, Let's focus on "Chainguard"'s
+```
+docker pull cgr.dev/chainguard/clang:latest
+docker pull chainguard/clang:latest
+```
+
+https://images.chainguard.dev/directory/image/clang/overview
+
+
+```bash
+
+docker run --rm -it \
+      --volume $(pwd):$(pwd) \
+      --user $(id -u):$(id -g) \
+      --workdir $(pwd) \
+      --env REPOROOT=$(realpath .) \
+   chainguard/clang:latest \
+      bash
+
+```
+cool: clang-15
+The latest supported is 15.
+
+
+Image's SBOM = ?
+
+SBOM: https://images.chainguard.dev/directory/image/clang/sbom
+
+Good to know:
+libxml2
+
+
+okok, let's create and build a dockerfile
+```dockerfile
+FROM silkeh/clang:latest
+# FROM silkeh/clang:17
+
+# The silkeh/clang image is based on debian:buster-slim
+
+# RUN apt-get update && apt-get install -y bash
+
+# not:    pip install --user pipx && \
+# do I need " --user" also in apt-get install pipx ?
+# no need: pipx ensurepath
+#no need?    export PATH=$PATH:/root/.local/bin && \
+# unable to locate pipx: apt-get install -y pipx
+# ok, then update
+# debconf: delaying package configuration, since apt-utils is not installed
+
+RUN \
+   apt-get update && \
+   apt-get install -y pipx && \
+   export PATH=$PATH:/root/.local/bin && \
+   pipx install conan
+
+
+# bash (not this, but the CVE one)
+# realpath
+# go (for act)
+# act: no
+
+
+#   # Build the Docker image
+#   docker build -t neopiler_clang17_with_conan2 -f /home/ephemssss/neopiler/toolchain/dockering/conan_with_clang.Dockerfile .
+#
+#   # Run the Docker container
+#   docker run -it neopiler_clang17_with_conan2
+
+```
+
+Successfully tagged neopiler_clang17_with_conan2:latest
+!
+
+
+```bash
+
+docker run --rm -it \
+      --volume $(pwd):$(pwd) \
+      --user $(id -u):$(id -g) \
+      --workdir $(pwd) \
+      --env REPOROOT=$(realpath .) \
+   neopiler_clang17_with_conan2:latest \
+      bash \
+      -c "source $(realpath .)/scripts/container-bashrc.source; /bin/bash"
+
+
+```
+
+but where is conan?
+which conan
+/home/ephemssss/.local/bin/conan
+
+ls -alt /home/ephemssss/.local/bin/
+total 24
+drwxrwxr-x 2 ephemssss ephemssss 4096 Mar 25 20:39 .
+lrwxrwxrwx 1 ephemssss ephemssss   49 Mar 25 20:39 conan -> /home/ephemssss/.local/pipx/venvs/conan/bin/conan
+drwxrwxr-x 6 ephemssss ephemssss 4096 Mar 25 16:47 ..
+-rwxrwxr-x 1 ephemssss ephemssss  206 Feb 27 21:59 cmake
+-rwxrwxr-x 1 ephemssss ephemssss  206 Feb 27 21:59 cpack
+-rwxrwxr-x 1 ephemssss ephemssss  206 Feb 27 21:59 ctest
+-rwxrwxr-x 1 ephemssss ephemssss  206 Feb 27 21:59 ninja
+
+
+oops:
+bash: sudo: command not found
+
+I need `ls /root`
+
+
+Added sudo. A separate layer, will make it faster.
+```Dockerfile
+RUN \
+   apt-get update && \
+   apt-get install -y sudo && \
+   apt-get install -y bash && \
+   apt-get install -y apt-utils && \
+```
+
+sudo: you do not exist in the passwd database
