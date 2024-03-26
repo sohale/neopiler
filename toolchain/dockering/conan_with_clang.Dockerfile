@@ -54,7 +54,11 @@ RUN \
 
 # Two problems: 1. It is root 2. We don't have $PATH at time of docker build
 # ENV PATH=$PATH:/root/.local/bin
-ENV PATH=/home/myuser/.local/bin:$PATH
+ENV \
+   PATH=/home/myuser/.local/bin:$PATH \
+   CC=/usr/bin/clang \
+   CXX=/usr/bin/clang++
+
 
 RUN \
    pipx install conan && \
@@ -66,6 +70,17 @@ RUN \
 # realpath
 # go (for act)
 # act: no
+
+
+RUN \
+   sudo apt-get remove -y gcc g++ && \
+   sudo apt-get autoremove -y && \
+   sudo apt-get clean && \
+   :
+# apt package itself depends on libstdc++6, hence, dont remove it.
+
+#    rm -rf /var/lib/apt/lists/*
+# remove the apt cache to reduce the image size.?
 
 # Reset DEBIAN_FRONTEND environment variable
 ENV DEBIAN_FRONTEND=dialog

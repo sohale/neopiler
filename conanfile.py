@@ -97,8 +97,10 @@ class Neopiler(ConanFile):
          # Compiler flags?
          self.settings.compiler.version = "16"
          #  warning: "Libc++ only supports Clang 16 and later" ( /usr/include/c++/v1/__config:48:8 )
-         self.settings.compiler.libcxx = "libc++"
-         self.settings.compiler.cppstd = "20"
+         # self.settings.compiler.libcxx = "libc++"
+         # self.settings.compiler.cppstd = "20"
+         self.settings.compiler.cppstd = "17"
+         # Is this the "build" or "host" (target)?
 
          print('@self.settings.compiler', self.settings.compiler, repr(self.settings.compiler))
       elif self.settings.compiler == "gcc":

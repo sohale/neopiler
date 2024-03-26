@@ -51,5 +51,9 @@ echo
 
 echo "source  /home/ephemssss/neopiler/scripts/container-bashrc.source"
 
+###### Logic
+export CC=/usr/bin/clang
+export CXX=/usr/bin/clang++
+
 ###### Done
 echo "End of this 'source' thing"

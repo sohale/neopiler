@@ -908,6 +908,17 @@ Difference between dangling and unused?!
 docker container prune
 
 
-
+Enalbed colour:
 force_color_prompt=yes
 color_prompt=yes
+
+What?
+
+./scripts/docker-run-clang-conan.bash
+ERROR: The default build profile '/home/myuser/.conan2/profiles/default' doesn't exist.
+You need to create a default profile (type 'conan profile detect' command)
+or specify your own profile with '--profile:build=<myprofile>
+
+So, which one: `--profile:build=` or `--profile=`?
+
+--profile:host=myprofile --profile:build=myprofile

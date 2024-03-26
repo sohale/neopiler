@@ -2,6 +2,8 @@
 
 # the-build.bash
 
+# direct build
+
 set -ex
 
 # conan install . --output-folder=build --build=missing

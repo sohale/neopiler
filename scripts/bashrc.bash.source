@@ -45,5 +45,8 @@ ssh-add ~/.ssh/github_rsa
 ###### Runtime (Using NeoPiler)
 echo "Startup: Setting up the runtime environment"
 
+export CC=/usr/bin/clang
+export CXX=/usr/bin/clang++
+
 ###### Done
 echo "End of this 'source' thing"
