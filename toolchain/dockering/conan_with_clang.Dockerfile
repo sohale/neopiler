@@ -41,7 +41,10 @@ RUN \
    :
 
 USER myuser
-ENV DEBIAN_FRONTEND=noninteractive
+ENV \
+   DEBIAN_FRONTEND=noninteractive \
+   force_color_prompt=yes \
+   color_prompt=yes
 
 # Python layer (reusable)
 RUN \

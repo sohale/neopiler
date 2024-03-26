@@ -9,6 +9,7 @@ echo -n "Startup: Running startup script for 'silkeh/clang:17' Docker container 
 # Self reflection + intention:
 realpath $REPOROOT/scripts/container-bashrc.source
 echo "REPOROOT=$REPOROOT"
+# But this will not be usable for dockerfile, since REPOROOT and its volume mapping is not done.
 
 # todo: skip if requirements not defined: REPOROOT, (maybe) pwd, etc
 
@@ -29,14 +30,17 @@ fi
 # ln -s  /root/.local/pipx/venvs/conan/bin/conan  ~/.local/bin/conan
 
 # yes, I recon it will be useful, and needed:
-pipx ensurepath
+pipx ensurepath --force
+# Cutesy interactive-dev-only: (not if this is only used for cli withous interactive bash)
+eval "$(register-python-argcomplete pipx)"
 
 ###### Colourful
 
 alias ls='ls --color=auto'
 # export PS1='DOCKER\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 # export PS1='\[\033[01;35m\]Docker-Container: \h \[\033[01;34m\]\W\[\033[00m\] \$ '
-export PS1='\[\033[01;35m\]Docker-Container: \h \[\033[01;34m\]\033[01;32m\]@\u\033[00m \W\[\033[00m\] \$ '
+# export PS1='\[\033[01;35m\]Docker-Container: \h \[\033[01;34m\]\033[01;32m\]@\u\033[00m \W\[\033[00m\] \$ '
+export PS1='\[\033[01;31m\e[44m\]Docker-Container: \h\[\033[01;34m\]\e[0m \033[01;32m\]@\u\033[00m \W\[\033[00m\] \$ '
 
 # no, not suitable for clang docker container
 # source scripts/bashrc.bash.source

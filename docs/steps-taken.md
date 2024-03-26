@@ -886,3 +886,28 @@ uid=1000(myuser) gid=1000(myuser) groups=1000(myuser)
 but:
 `id root`
 uid=0(root) gid=0(root) groups=0(root)
+
+
+ok, now cleaning up:
+```
+docker ps -a | grep 'act-push-yml' | awk '{print $1}' | xargs docker rm
+
+
+docker images | awk '{print $3}' |xargs docker rmi
+
+```
+
+
+To remove all unused images (not just dangling ones), you can use:
+```
+docker image prune -a
+```
+
+Difference between dangling and unused?!
+
+docker container prune
+
+
+
+force_color_prompt=yes
+color_prompt=yes
