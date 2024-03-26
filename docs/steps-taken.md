@@ -302,7 +302,125 @@ Note:
 conan install . --output-folder=build --profile=./conan/linux-clang-20-debug.profile    --build=missing
 ```
 
+
 Next issue: Standard libary is missing? `/usr/include/c++/v1/new:218:40: error: 'std' is not a class, namespace, or enumeration`
+
+#### Standard library artifacts
+Learning note: on libstdc, libc++
+
+##### Question:
+```
+A few (a myriad of) quesitions about libc++.
+
+Four things: lib std c++, lib c++, lib c, lib std c
+Two things: Clang , gcc.
+
+Why do we have both `libstdc++11`  & `libc++` for clang?
+Does it (11 or nont-11) depend on C++ version?
+Could it be related to modules in C++20?
+Is `libc++` for before, or after?
+If I want to stick to C++20, which ones (of the two) do I need?
+Why we have `libstdc++11` for C++11, and not before C++11?
+Will `libstdc++11` work with C++20?
+Why is it apt-get that has: `libc++-dev` and `libc++abi-dev`?
+Why both?
+Why are they separate as part of apt-get?
+Is it independent from GCC vs clang?
+but I think clang has its own stdlib?
+Is stdlib a link-time thing? or header-only? or both?
+Why is stdlib needed? doesn't linux itself provide the basis? (files, etc)
+Why did they separate stdlib?
+Is it just the `std::` of C++ and everything in it?
+So it is not just C?
+
+doesn't C itself need a standard library?
+is C library perpendicular to C++'s?
+
+Why is it `libc++-dev` and not libc++?
+Why ABI in `libc++abi-dev`. isn't a non-ABI enough?
+Why package manager (conanfile or its profile) needs to specify that? and why?
+```
+
+##### The two: Why separate std lib
+`Why multiple & separate std lib: the two`
+
+Standard libary can have multiple implementations. Otherwise, it is just a standard.
+
+' ##### Why separating stdlib'
+The separation of the standard library from compilers allows for flexibility and the continuous evolution of C++ support, independent of compiler updates.
+
+##### The two: Why multiple std libs
+Implementations include GNU (part of GCC), and Clang's re-implentations of it.
+
+The former can be used with Clang too, because clang is backward compatible. (but not recommended? Is it slower? Is it kept compatilble? or is it just compatible? Why did them reimplement it for LLVM? In fact I remember they said the way they were written was creating IR that were not suitable for LLVM's optimisations)
+
+* `libstdc++` …: GNU implementation
+* `libc++` : Specific to Clang/LLVM (lighter)
+
+Specific artifacts:
+* `libstdc++11`
+* `libc++`
+
+The `11` suffix does not mean any limitation to version. Both support latest versions of C++. Both evolved continuously.
+‌Both can be used in C++20.
+
+###### From user's point of view (what benefit from) re-implementinf
+Clang with `libc++` versus Clang with `libstdc++`:
+1. is "more naturally paired"
+2. "designed for compatibility with Clang and LLVM"
+3. "aims to be lighter"
+4. "and more performant"
+5. `libc++` "is designed to work with Clang" and not GCC. But `libstdc++` can be used with both.
+6. Part of: they are "part of" clang and gcc, respectively.
+7. "different implementations might be optimized for different compilers" or "systems"
+8. "compatibility with your compiler"
+
+
+##### Binary-ness & link-ed-ness
+C++ standard library includes both header-only components and components that require linking.
+Only the template and inline are as source (to verify). Otherwise, shuipped as binary.
+
+##### apt-get artifacts
+Artifacts:
+* `libc++-dev`
+* `libc++abi-dev`
+These are `apt-get`--specific names.
+
+Both for `libc++` (as opposed to `libstdc++11`).
+
+
+Difference:
+* `libc++-dev`: provides the "headers and development files" for libc++.
+* `libc++abi-dev` : implements the low-level ABI
+
+
+Is the `-dev` suffix for compiling software that "depends on the library"? or to develop the library itself? (to verify:) The development of library itself will not need apt-get packages.
+
+* "an ABI layer": ABI as a layer added, for e.g. `libc++`.
+   * The ABI layer is only between headers and binaries of the same?
+   * Then why do we have them (as) separate packages?
+
+##### C vs C++ standard libraries:
+* C++ standard library is compatible at level of interface (and ABI), but the implementation should be different to C (to verify)
+* The C standard library packages and (product) names are different. (to verify) (look up the names)
+
+* Are C and C++ ABI-level compatible?
+   * (If backward-compatibility is conserved. How much?)
+   * Maybe being ABI-compatible is meaningful in context of compiling (because we are compiling them, and we don't need to mix headers of one stdlib with binaries of another. But I am speculating this, and am not sure).
+
+##### Side notes:
+
+Motivation of separating:
+* Nice way to say: "standard library is separated from the compiler to allow for evolution and improvement of the library independent of the compiler"
+* allows for different implementations
+* "different implementations might be optimized for different compilers or systems"
+
+##### On status of C++20 modules:
+Damn, as of 26 March 2024 still suppor for modules are partially missing for both Clang and GCC:
+* gcc 11 (partial)
+* clang 8 (partial)
+
+"standard c++ modules"? See https://clang.llvm.org/docs/StandardCPlusPlusModules.html#how-modules-speed-up-compilation
 
 ### Conan 2
 * **Layout**: the directory structure of the project.
