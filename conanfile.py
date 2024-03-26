@@ -86,6 +86,7 @@ class Neopiler(ConanFile):
       # Used to conflict with `generators=`
       tc = CMakeToolchain(self)
       # "cmake_find_package": If I need to `find_package()` something else (a dependency of me, not me as a dependency)
+      # a clean distinction between automatic generation of integration files (based on the [requires] section) and custom, scriptable actions you might want to take before the build starts (such as configuring additional toolchain settings).
       tc.generate()
    # eq. to : generators = "CMakeToolchain" (?)
    # def generate(self):
