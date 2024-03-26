@@ -4,9 +4,35 @@
 #  * A clang container
 #  * No: git
 
+# Use via 'source'ing
+echo -n "Startup: Running startup script for 'silkeh/clang:17' Docker container "
+# Self reflection + intention:
+realpath $REPOROOT/scripts/container-bashrc.source
+echo "REPOROOT=$REPOROOT"
+
+# todo: skip if requirements not defined: REPOROOT, (maybe) pwd, etc
+
+###### Guard. To run only as `source`, not `bash`
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    echo "Error: This must be run only using 'source', and not 'bash'. Please run with:    source ${BASH_SOURCE[0]}"
+    exit 1
+    # return  # 'return' only allows bash, noit source
+fi
+
+###### Colourful
+
 alias ls='ls --color=auto'
 # export PS1='DOCKER\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 # export PS1='\[\033[01;35m\]Docker-Container: \h \[\033[01;34m\]\W\[\033[00m\] \$ '
 export PS1='\[\033[01;35m\]Docker-Container: \h \[\033[01;34m\]\033[01;32m\]@\u\033[00m \W\[\033[00m\] \$ '
 
-source scripts/bashrc.bash.source
+# no, not suitable for clang docker container
+# source scripts/bashrc.bash.source
+
+env
+
+
+echo "source  /home/ephemssss/neopiler/scripts/container-bashrc.source"
+
+###### Done
+echo "End of this 'source' thing"

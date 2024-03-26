@@ -663,7 +663,11 @@ Already mapping of the file using `--user $(id -u):$(id -g)` works:
 ```
 
 Good pattern:
-Use source ing insode the container.
+Use source ing inside the container.
+
+Usage: docker run ... `bash -c "source /path/to/yourfile; exec bash"`
+
+Why `exec`? Aha, inside bash, we want to rnu another bash, but reuse the process & PID.
 
 A possible pattern:
 --env CONTAINER_NAME=mycontainer
@@ -673,3 +677,29 @@ Notes:
 * Note: `--env-file`
 * Use a `docker-compose.yml`
 * I deally, RUN useradd -m myuser -u 1000 -g 1000
+
+
+```bash
+
+docker run --rm -it \
+      --volume $(pwd):$(pwd) \
+      --user $(id -u):$(id -g) \
+      --workdir $(pwd) \
+      --env REPOROOT=$(realpath .) \
+   silkeh/clang:17 \
+      bash \
+      -c "source $(realpath .)/scripts/container-bashrc.source; exec bash"
+
+
+
+docker run --rm -it \
+      --volume $(pwd):$(pwd) \
+      --user $(id -u):$(id -g) \
+      --workdir $(pwd) \
+      --env REPOROOT=$(realpath .) \
+   silkeh/clang:17 \
+      bash \
+      -c "source $(realpath .)/scripts/container-bashrc.source; /bin/bash"
+
+
+```

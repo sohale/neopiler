@@ -6,6 +6,8 @@
 # © 2024 / CC. Pattern by Sosi.
 # Based on my gpu-experimentations/provisioning_scripts/refresh-ssh-agent.bash_source
 
+# Not suitable for clang docker container
+
 echo -n "Startup: Running startup script: "
 # Self reflection:
 realpath scripts/bashrc.bash.source
