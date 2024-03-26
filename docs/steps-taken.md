@@ -462,6 +462,30 @@ ABI notes:
    * C ABI issues are less complex
       * simpler compilation model of C
       * C's lack of features like name mangling.
+* Contributing to ABI complexity:
+   * Name Mangling (Name Decoration):
+   * Exception Handling
+   * Virtual Tables
+      * Virtual Inheritance
+      * dynamic binding
+      * The layout of virtual tables (vtables)
+      * dynamic binding can vary between compilers, affecting how method calls are resolved at runtime.
+   * Templates and Template Instantiation
+      * different Template instantiation strategies across compilers  & compiler verions
+   * Inheritance and Object Layout
+
+* interoperability
+ABI (Application Binary Interface) is fundamentally about interoperability.
+
+ABI compatibility across
+* different compilers
+* different compiler versions
+* different  build configurations
+
+separation of the compilation and linking phases is key.
+
+for independent compilation of modules that,
+"must" "later" be linked into a single executable or library.
 
 ##### C vs C++ standard libraries:
 * C++ standard library is compatible at level of interface (and ABI), but the implementation should be different to C (to verify). It seems there is partial (degrees of) ABI-compatibility.
