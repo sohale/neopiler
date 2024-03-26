@@ -28,6 +28,9 @@ fi
 # ln -s /root/bin/conan ~/.local/pipx/venvs/conan/bin/conan
 # ln -s  /root/.local/pipx/venvs/conan/bin/conan  ~/.local/bin/conan
 
+# yes, I recon it will be useful, and needed:
+pipx ensurepath
+
 ###### Colourful
 
 alias ls='ls --color=auto'
@@ -38,8 +41,9 @@ export PS1='\[\033[01;35m\]Docker-Container: \h \[\033[01;34m\]\033[01;32m\]@\u\
 # no, not suitable for clang docker container
 # source scripts/bashrc.bash.source
 
+echo
 env
-
+echo
 
 echo "source  /home/ephemssss/neopiler/scripts/container-bashrc.source"
 

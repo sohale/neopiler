@@ -40,14 +40,18 @@ RUN \
    echo 'myuser ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers && \
    :
 
+USER myuser
+ENV DEBIAN_FRONTEND=noninteractive
+
 # Python layer (reusable)
 RUN \
-   apt-get install -y pipx && \
-   export PATH=$PATH:/root/.local/bin && \
+   sudo apt-get install -y pipx && \
    :
+#    export PATH=$PATH:/root/.local/bin && \
 
 # Two problems: 1. It is root 2. We don't have $PATH at time of docker build
-ENV PATH=$PATH:/root/.local/bin
+# ENV PATH=$PATH:/root/.local/bin
+ENV PATH=/home/myuser/.local/bin:$PATH
 
 RUN \
    pipx install conan && \
