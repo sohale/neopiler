@@ -962,9 +962,43 @@ $JBIN/java -jar $AJAR
 # verifies ANTLR is running: ANTLR Parser Generator  Version 4.13.1
 
 $JBIN/java -jar $AJAR  -Dlanguage=C++ -o output_dir ./toolkit/cxx/cstring.antlr.g4
+$JBIN/java -jar $AJAR    -Dlanguage=Cpp   -o ./antlr_output_dir ./toolkit/cxx/CString.g4
 ```
 
 ```
 error(31):  ANTLR cannot generate C++ code as of version 4.13.1
+
 error(8): cstring.antlr.g4:13:8: grammar name CppString and file name cstring.antlr.g4 differ
+```
+
+via: `ls /home/myuser/.conan2/p/b/antlrc5de69fe928ca/b/src/runtime/`
+
+
+Supported languages are:
+* CSharp
+* Cpp
+* Dart
+* Go
+* Java
+* JavaScript
+* Python3
+* Swift
+
+ok it was a typo.
+
+Outcome of the build: `ls -1 antlr_output_dir/toolkit/cxx/`
+
+```
+CString.interp
+CString.tokens
+CStringBaseListener.cpp
+CStringBaseListener.h
+CStringLexer.cpp
+CStringLexer.h
+CStringLexer.interp
+CStringLexer.tokens
+CStringListener.cpp
+CStringListener.h
+CStringParser.cpp
+CStringParser.h
 ```
