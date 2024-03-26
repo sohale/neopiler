@@ -244,6 +244,24 @@ Why does conanfile have a layout?
 [layout]
 cmake_layout
 ```
+```
+ERROR: Missing binary: antlr4-cppruntime/4.13.1:
+ERROR: Missing prebuilt package for 'antlr4-cppruntime/4.13.1'. You can try:
+```
+It suggestes:
+    - List all available packages using `conan list antlr4-cppruntime/4.13.1:* -r=remote`
+    - Explain missing binaries: replace `conan install ...` with 'conan graph explain ...'
+    - Try to build locally from sources using the `--build=antlr4-cppruntime/4.13.1` argument
+
+ I suppose, also `--build=missing`
+
+
+but:
+conan list antlr4-cppruntime/4.13.1:* -r=remote
+ERROR: Remote 'remote' can't be found or is disabled
+conan install antlr4-cppruntime/4.13.1:*
+ERROR: Conanfile not found at /home/ephemssss/neopiler/antlr4-cppruntime/4.13.1:*
+
 
 ### Conan 2
 * **Layout**: the directory structure of the project.
