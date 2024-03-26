@@ -42,3 +42,6 @@ ssh-add ~/.ssh/github_rsa
 
 ###### Runtime (Using NeoPiler)
 echo "Startup: Setting up the runtime environment"
+
+###### Done
+echo "End of this 'source' thing"

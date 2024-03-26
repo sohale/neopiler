@@ -592,3 +592,78 @@ Ubuntu clang version 14.0.0-1ubuntu1.1
 Target: x86_64-pc-linux-gnu
 Thread model: posix
 InstalledDir: /usr/bin
+
+https://clangd.llvm.org/installation.html
+
+How to install latest clangd, and not take too long?
+* ccache?
+* dockerfile
+* ready docker image
+
+
+```bash
+
+docker pull silkeh/clang
+docker pull silkeh/clang:17
+
+docker run --rm -it silkeh/clang bash
+docker run --rm -it -v $(pwd):$(pwd) silkeh/clang bash
+
+export ENVFILE=toolchain/scripts/clang-env-docker.env
+
+docker run --rm -it -v $(pwd):$(pwd) --env-file "$ENVFILE" silkeh/clang:17 bash
+
+docker run --rm -it \
+      -v $(pwd):$(pwd) \
+      --env-file "$ENVFILE" \
+      --user $(id -u):$(id -g) \
+   silkeh/clang:17 \
+      bash
+
+
+docker run --rm -it \
+      --volume $(pwd):$(pwd) \
+      --user $(id -u):$(id -g) \
+      --workdir $(pwd) \
+      --env REPOROOT=$(realpath .) \
+   silkeh/clang:17 \
+      bash
+
+```
+
+
+```bash
+export ENVFILE=toolchain/scripts/clang-env-docker.env
+touch $ENVFILE
+export ENVRFILE=$(realpath $ENVFILE)
+printenv | grep -E '^(HOME|PS1)=' > $ENVRFILE
+echo "# End of host's environment variables" >> $ENVRFILE
+
+```
+
+Mapping user inside Docker:
+Inside Docker container:
+```bash
+cat /etc/passwd
+cat /etc/group
+id -u
+id -g
+id
+```
+
+
+The user inside is: (by running command `id`):
+```
+uid=1000 gid=1000 groups=1000
+```
+Already mapping of the file using `--user $(id -u):$(id -g)` works:
+```
+-rw-r--r--  1 ephemssss ephemssss     0 Mar 26 16:57 file-created-in-container.txt
+-rw-rw-r--  1 ephemssss ephemssss  1527 Mar 25 16:39 file-created-in-host.txt
+```
+
+Notes:
+* Specifically: `:17`
+* Note: `--env-file`
+* Use a `docker-compose.yml`
+* I deally, RUN useradd -m myuser -u 1000 -g 1000
