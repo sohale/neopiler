@@ -265,14 +265,37 @@ conan list antlr4-cppruntime/4.13.1:* -r=remote
 conan install antlr4-cppruntime/4.13.1:*
 ```
 `ERROR: Conanfile not found at /home/ephemssss/neopiler/antlr4-cppruntime/4.13.1:*`
-```bash
-conan remote list
-```
-`conancenter: https://center.conan.io [Verify SSL: True, Enabled: True]`
+
 
 Fixed by adding:
 `--build=missing`
 to my `conan install …`
+
+Also useful: (not, no `*` or `@`)
+```bash
+conan search antlr4-cppruntime/4.13.1 -r conancenter
+conan remote list
+conan remote enable conancenter
+```
+Some outputs:
+`conancenter: https://center.conan.io [Verify SSL: True, Enabled: True]`
+
+
+Why remote is not accepted?
+`conan list antlr4-cppruntime/4.13.1:* -r=remote`
+
+
+This could be useful, but already fine:
+```bash
+sudo apt-get install clang
+sudo apt-get reinstall clang
+``
+
+This was Missing:
+```bash
+export CC=/usr/bin/clang
+export CXX=/usr/bin/clang++
+```
 
 ### Conan 2
 * **Layout**: the directory structure of the project.
