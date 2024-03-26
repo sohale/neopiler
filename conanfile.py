@@ -45,7 +45,9 @@ class Neopiler(ConanFile):
 
 
    # Conan 2
-   generators = "CMakeToolchain"
+   # generators = "CMakeToolchain"
+   # conflicts with  def generate(self)
+   # "cmake_find_package": bridges the gap between Conan-managed dependencies and CMake's native dependency discovery mechanism.
 
 
    # Binary configuration
@@ -81,7 +83,9 @@ class Neopiler(ConanFile):
    # exports_sources = "CMakeLists.txt", "src/*", "include/*"
 
    def generate(self):
+      # Used to conflict with `generators=`
       tc = CMakeToolchain(self)
+      # "cmake_find_package": If I need to `find_package()` something else (a dependency of me, not me as a dependency)
       tc.generate()
    # eq. to : generators = "CMakeToolchain" (?)
    # def generate(self):
@@ -94,6 +98,7 @@ class Neopiler(ConanFile):
    def configure(self):
       print("In Conan 2 too? Yes. Confirmed")
       if self.settings.compiler == "clang":
+         print('Yes, Clang')
          # Compiler flags?
          self.settings.compiler.version = "16"
          #  warning: "Libc++ only supports Clang 16 and later" ( /usr/include/c++/v1/__config:48:8 )

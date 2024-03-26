@@ -922,3 +922,11 @@ or specify your own profile with '--profile:build=<myprofile>
 So, which one: `--profile:build=` or `--profile=`?
 
 --profile:host=myprofile --profile:build=myprofile
+
+
+New approachL removed ANTLR for now.
+
+A conflict
+In Conan, the `CMakeToolchain` can be specified either in the generators attribute of your conanfile.py or instantiated and used within the generate() method, but not both simultaneously.
+
+Generated aggregated env files: ['conanbuild.sh', 'conanrun.sh']
