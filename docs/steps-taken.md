@@ -1002,3 +1002,7 @@ CStringListener.h
 CStringParser.cpp
 CStringParser.h
 ```
+
+### ANTLR
+
+fragments do not directly result in tokens or actions (like skipping input).
