@@ -12,4 +12,5 @@ compiler.version=17
 # compiler.libcxx=libc++
 
 compiler.cppstd=20
+
 build_type=Debug

@@ -950,3 +950,21 @@ conan remove "antlr4-cppruntime/4.13.1" -b -p
 -b option removes the build folder, -p removes the package folder, and -f forces the action without confirmation.
 
 Oh no, it does not run that in the container!
+
+OK done.
+
+Now runnning ANTLR 4
+```bash
+export JBIN=/home/myuser/.conan2/p/openj8b5e1658a4707/p/bin
+export AJAR=/home/myuser/.conan2/p/antlr15795d040a28f/p/res/antlr-complete.jar
+export CLASSPATH=".:$AJAR:$CLASSPATH"
+$JBIN/java -jar $AJAR
+# verifies ANTLR is running: ANTLR Parser Generator  Version 4.13.1
+
+$JBIN/java -jar $AJAR  -Dlanguage=C++ -o output_dir ./toolkit/cxx/cstring.antlr.g4
+```
+
+```
+error(31):  ANTLR cannot generate C++ code as of version 4.13.1
+error(8): cstring.antlr.g4:13:8: grammar name CppString and file name cstring.antlr.g4 differ
+```
