@@ -1,0 +1,3 @@
+subgrammar CString;
+
+"This is a C stirng \n"
