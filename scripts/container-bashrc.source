@@ -1,7 +1,6 @@
 # Specific to the container that runs Clang
-#
+# Pattern by Sosi, CC / © 2024
 # Setup/layout:
-#
 #  * A clang container
 #  * No: git
 

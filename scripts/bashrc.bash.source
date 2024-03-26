@@ -2,8 +2,8 @@
 # The startup-bashrc.source source-script
 # Add: source /home/ephemssss/neopiler/scripts/bashrc.bash.source
 
-# Pattern by Sosi, CC / © 2014
-# © 2014 / CC. Pattern by Sosi.
+# Pattern by Sosi, CC / © 2024
+# © 2024 / CC. Pattern by Sosi.
 # Based on my gpu-experimentations/provisioning_scripts/refresh-ssh-agent.bash_source
 
 echo -n "Startup: Running startup script: "

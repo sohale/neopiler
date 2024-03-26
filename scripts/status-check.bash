@@ -1,6 +1,6 @@
 # Required foundation programs
 
-# Pattern by Sosi, CC / © 2014
+# Pattern by Sosi, CC / © 2024
 
 git --version
 ssh -T git@github.com  # check remote access for git. If failed: source ~/gpu-experimentations/provisioning_scripts/refresh-ssh-agent.bash_source

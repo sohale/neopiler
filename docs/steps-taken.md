@@ -662,6 +662,12 @@ Already mapping of the file using `--user $(id -u):$(id -g)` works:
 -rw-rw-r--  1 ephemssss ephemssss  1527 Mar 25 16:39 file-created-in-host.txt
 ```
 
+Good pattern:
+Use source ing insode the container.
+
+A possible pattern:
+--env CONTAINER_NAME=mycontainer
+
 Notes:
 * Specifically: `:17`
 * Note: `--env-file`
