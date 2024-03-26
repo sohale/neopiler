@@ -10,7 +10,8 @@
  ANTLR block comment:
 */
 
-grammar CppString; // CString
+// CppString or CString?
+grammar CString;
 
 // Entry point that matches a string without the surrounding quotes
 string
