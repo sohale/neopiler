@@ -19,6 +19,15 @@ if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
     # return  # 'return' only allows bash, noit source
 fi
 
+
+###### Only specific to my derivation of the clang:17
+# ~/.local/bin/conan -> ~/.local/pipx/venvs/conan/bin/conan
+# From root to whatever is the current user
+# ln -s /root/bin/conan ~/.local/pipx/venvs/conan/bin/conan
+# ln -s  /root/.local/pipx/venvs/conan/bin/conan  /root/bin/conan
+# ln -s /root/bin/conan ~/.local/pipx/venvs/conan/bin/conan
+# ln -s  /root/.local/pipx/venvs/conan/bin/conan  ~/.local/bin/conan
+
 ###### Colourful
 
 alias ls='ls --color=auto'

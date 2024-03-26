@@ -870,3 +870,19 @@ Nevertheless, `E: Unable to locate package apt-fast`
 
 ok, I need to add this too:
 debconf: delaying package configuration, since apt-utils is not installed
+
+OK, now conan command available: `/root/.local/bin/conan`
+
+Note:
+/home/ephemssss/.local/bin/conan -> /home/ephemssss/.local/pipx/venvs/conan/bin/conan
+
+
+At what step of the docker it creates myuser?
+It's OK, since the number is `1000`
+`id`
+uid=1000(myuser) gid=1000(myuser) groups=1000(myuser)
+
+
+but:
+`id root`
+uid=0(root) gid=0(root) groups=0(root)
