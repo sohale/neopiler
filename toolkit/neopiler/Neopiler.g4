@@ -5,8 +5,17 @@ aka, Neo file
 .neo file
 
 */
-
+// todo: rename: NeopilerParser
 grammar Neopiler;
+
+// See C++ Parser: https://github.com/antlr/grammars-v4/blob/master/cpp/CPP14Parser.g4
+
+/*
+options {
+    superClass = CPP14ParserBase;
+    tokenVocab = CPP14Lexer;
+}
+*/
 
 // workaround for quick PoC
 import CString; // Import the CString grammar
