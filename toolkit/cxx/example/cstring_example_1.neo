@@ -39,6 +39,10 @@ StringUtf8 isa String;
 C0String isa String;
 String isa Type;
 
+
+# todo: InfinitInt, similarly, as a Rep (binary representaiton im memory).
+#   But if can be writtern completely natively?!
+
 # Relate literal to type
 grammar CString + grammarwrapper DoubleQuotations + InternalRepresentation(CString, CStringIRerp);
 
@@ -70,12 +74,50 @@ CStringIRerp = Templator(  )
 # atom ICode
 
 
+# binary buffer
+def datachunk = atom;
+
+# # Relate literal to type
+# grammar CString + grammarwrapper DoubleQuotations + InternalRepresentation(CString, CStringIRerp);
+
+
 # Eventually:
-def datachunk # binary buffer
-=
-C0StringIRerp(
-"This is a C stirng \n"
-)
+def datachunk = C0StringIRerp( CString "This is a C stirng \n" )
+
+The `InternalRepresentation(CString, CStringIRerp)` can be "realised" via a "tempolator/roper", which is a C++ file?
+
+
+atom roper;
+
+# anonymous rpoer
+roper ... realises InternalRepresentation(CString, CStringIRerp)
+realisedby # an ANTLR4 <-+-> a binaryrepresenation !
+"_ZN11MyNamespace3addEii" in "cstring_binaryfile.obj" # specify which function signaure, in which object file !
+# or a.obj binary file with an ABI? ... So I need to add an ABI here, too? (or the ABI handler can be automated? note: python implementations. See: Python-to-C++: python bindings for C++ (!) [the opposite of the usual python bindings] )
+
+# Maybe:
+```cpp
+const std::vector<uint8_t> encode_c0string(ANTLR4_output_t parsed);
+```
+# what did I just write? I intended as comment, but ...
+
+
+# a ttor/roper
+roper
+relises InternalRepresentation(CString, CStringIRerp)
+relisedby (cppobjectfile "myrepresenter" → )
+# How does clang do.handle/manage something like this? ^
+
+# Also see, mangler: `abi::__cxa_demangle` from `#include <cxxabi.h>`.
+
+# or :llvm::demangle(mangledName);
+
+# Also could be `relisedby` some python?  relisedby (python "myrepresenter" → )  # makes an interface with a def defined in a python file.
+
+
+
+# todo: .
+
 # `→`
 
 
