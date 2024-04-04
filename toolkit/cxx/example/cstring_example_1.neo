@@ -1,3 +1,160 @@
-subgrammar CString;
+# A single file that demonstrated abilities, but in a real-life scenarios, amny of these are in their own separate files
+# Also (perhaps) some will go to CMake, some to (templated) bash files, etc
 
+# prefixes: grammar, xtime, package
+# Command: import, open, (use), ...
+
+# "use" or import?
+# use grammar
+# prefix: "grammar", etc
+# "grammar GRAMMARNAME"
+import grammar CString, RawTextCode
+import grammar_wrapper CurlyBrakets, TripleTick;
+
+# "xtime GRAMMARNAME"
+import xtime CompileTime as τc;   # or: ctime, compiletime;
+import xtime RunTime as τr;       # or: rtime, runtime;
+
+τc:
+
+# again, "package PACKAGENAME"
+open package std.Types
+
+# atom command simply and an item to symbol table. No contant. Just a label (with id)
+#    do we multiple symbol tables? ICode, ... types: ..., etc
+atom Type;
+atom ICode;
+
+# atom Type
+atom Int32, Int64, IntU8;
+atom Float16;
+atom C0String;  # null-terminate string
+# atom StringUtf8;  # a raw string with UTF-8 preemble
+atom StringUtf8;  # a raw string UTF-8-coded, but without UTF-8 preemble
+
+# possiblity: consider int a Type; ?? those, via being "int"? Also, a compile-time InfiniteInt?
+
+# not an instance, but, is-sub-type
+StringUtf8 isa String;
+C0String isa String;
+String isa Type;
+
+# Relate literal to type
+grammar CString + grammarwrapper DoubleQuotations + InternalRepresentation(CString, CStringIRerp);
+
+build C0StringIRerp:
+   "ksy file" # (Kaitai Struct YAML file)
+   file: inline: (as "c0string.ksy")
+            # internally (at TEXT layer: pre-tokenisation) you can refer to it as a file, whils it is not afile.
+            # The file names are their own type of literals (maybe a file prefix? or "path"? as path "c0string.ksy")
+            # potential names: c0string.ksy, null_terminated_string.ksy
+      ```
+      meta:
+         id: null_terminated_string
+         title: Null-terminated String
+         endian: le
+      doc: A null-terminated string is a sequence of characters terminated by a single null byte (0x00).
+
+      seq:
+        - id: str
+          type: strz
+          encoding: ASCII  # or UTF-8
+      ```
+      # Will use `kaitai-struct-compiler -t cpp_stl --cpp-standard 20 c0string.ksy`
+      # generates: c0string.h, c0string.cpp (or?? C0StringIRerp?)
+
+
+# uses https://kaitai.io/ here
+CStringIRerp = Templator(  )
+
+# atom ICode
+
+
+# Eventually:
+def datachunk # binary buffer
+=
+C0StringIRerp(
 "This is a C stirng \n"
+)
+# `→`
+
+
+
+# .....
+# older:
+
+Eventually, in code generation, the atomic types will MAP to IR's types: i32, etc
+
+# // Array: simply array, runtime: contruct-time length (Like Java)
+# consider Array = Type;
+# constrain Array : signature = function Type ⟶ Type;
+
+atom array isa Type;
+# def array = atom array;
+def array = atom;  # abstract?
+def ArrayFixed = atom;
+def ArrayFixed = atom;
+# atoms dont need prefix? "atom ArrayFixed"
+# but you can say: "Type ArrayFixed"?
+
+# export as part of the `open`ed package?  for example: `export package`
+export
+def Array::Signature = function int ⟶ Type;  # `function` and `→`
+...
+def Array : signature = function int ⟶ Type;
+# old idea ^^
+
+// All with this pattern: ` function Type ⟶ Type` will match the pattern: with Array, no need for superclass, or explicit abstraction?
+// So,  ` function Type ⟶ Type` is a value ! (symbolic successsion of symbols -- for now)
+// We can consider this a "signature"
+def Array : signature = function int ⟶ Type;
+
+// ArrayFixed: simply array, compile-time length
+// also can be in stack. (no need for ArrayInStack )
+constrain ArrayFixed : signature = function Type ⟶ Type  -- same_as Array;
+
+
+// ArrayVector: simply array, run-time length
+constrain ArrayVector = function Type ⟶ Type -- same_as Array;;
+
+
+
+// RawTextCode remains un-processed
+
+τc:
+// const
+var x : String = "This is a C stirng \n"
+
+def f = ICode'LLVM:Raw {
+
+      entry:
+   %i = alloca i32, align 4
+   %j = alloca i32, align 4
+   store i32 5, ptr %i, align 4
+   store i32 2, ptr %j, align 4
+   %0 = load i32, ptr %i, align 4
+   %add = add nsw i32 %0, 2
+   ret i32 %add
+}
+
+// declaration
+def ftype = ICode'LLVM:Raw {
+   define dso_local noundef i32 @m()() {}
+}
+
+def f = ICode'Cpp:External {
+    int i = 5;
+    constexpr int j = 2;
+    return i + j;
+}
+
+def f = ICode'Cpp:Object {
+   #include <cstdio>
+
+   int m()
+   {
+      int i = 5;
+      constexpr int j = 2;
+      return i + j;
+   }
+}
