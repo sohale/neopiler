@@ -1,0 +1,14 @@
+def κ = neopiler::core;
+defmut variable : Type = κ::defer;  // The actual value is injected later
+
+def AudioProcessor : recurrent_state {
+    def filter : Filter = κ::defer;  // Injected at runtime via DI container
+
+    "begin": constructor () {
+        // Runtime resolution of the filter dependency
+    }
+
+    // "process": loop {
+
+    }
+}
