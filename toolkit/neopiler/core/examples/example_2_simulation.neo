@@ -1,8 +1,41 @@
-def κ = neopiler::core;
-defmut variable : Type = κ::defer;  // The actual value is injected later
+import neopiler;  // always
 
-def AudioProcessor : recurrent_state {
-    def filter : Filter = κ::defer;  // Injected at runtime via DI container
+def κ = neopiler::core;
+def float = κ::float32;
+def ← = κ::consume;
+def 'it = κ::above_definition;  // the result of last statement
+def ⧴ = κ::defer_value; // postpone
+// defmut myvariable : MyType = κ::defer_value;  // The actual value is injected later
+def defer_type = κ::defer_value; // postpone
+def _auto = defer_type;
+
+def recurrent_state = κ::::recurrent_state;
+
+import math;
+
+def MyRState = recurrent_state + RState(
+   "side_bands; begin; state_loop : [input; output; while;] end",
+   {
+      "side_bands": _auto,
+      // "begin": // one way  you can specify the type here if you want, but can be inferred too.
+   }
+);
+
+def frequency_modulator_generator : recurrent_state + MyRState
+{
+   "side_bands":
+   def hparams : static_struct_state {
+      def clip_max : float = 1.0;
+      def clip_min : float = -1.0;
+   }
+   // todo: more.
+   // incomplete. TBC.
+   // ...
+}
+
+def AudioProcessor : AudioProcessor & recurrent_state {
+   // AudioProcessor
+    def filter : Filter = κ::defer_value;  // Injected at runtime via DI container
 
     "begin": constructor () {
         // Runtime resolution of the filter dependency
