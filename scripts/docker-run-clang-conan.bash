@@ -20,7 +20,7 @@ docker run \
       --profile:host=./conan/linux-clang-20-debug.profile \
       --build=missing \
       && \
-      echo "hi2" && \
+      echo "hi2. Now you can run scripts/build-grammars.bash etc " && \
       bash
       '
 

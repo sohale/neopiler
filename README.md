@@ -50,3 +50,8 @@ Even potentially adding (or selecting) core languages in their repo.
 
 These sublanguages are used in blocks (aka zones).
 Each has a detector / detector pattern in the host language (.neo).
+
+### Inspirarions
+Other than, of course, C++.
+* VHDL
+* Lean4

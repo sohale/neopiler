@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Run from Docker
 
 # builds base (standard: std1) grammars
 
