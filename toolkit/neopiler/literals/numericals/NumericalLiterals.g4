@@ -1,6 +1,6 @@
 grammar NumericalLiterals;
 // numericals
-ß
+
 // Entry point for parsing
 numLiteral : floatingPointLiteral | integerLiteral ;
 
