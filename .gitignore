@@ -37,3 +37,15 @@ install/act
 
 # not sure
 install
+
+# ANLTR4
+
+# including subfolders
+.antlr/
+antlr_output_dir/
+
+# etc
+.vscode
+
+# Project-specific
+build/
