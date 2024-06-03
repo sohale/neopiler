@@ -21,7 +21,7 @@ if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
     # return  # 'return' only allows bash, noit source
 fi
 if [ -f /.dockerenv ]; then
-    echo "Warning: Not suitable for clang docker container."
+    echo "🟡 Warning: You are inside a Docker container. This .bashrc is not suitable for inside your Docker container."
 fi
 
 
@@ -43,8 +43,9 @@ export PATH=$PATH:/usr/local/go/bin
 # neovim only has one executable here
 export PATH=$PATH:$HOME/install/neovim/nvim-linux64/bin
 
-#export PATH="$PATH:$HOME/.pyenv/bin"
+# pyenv + its "shell integration"
 # When did I install pyenv?
+# export PATH="$PATH:$HOME/.pyenv/bin"
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
