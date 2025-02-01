@@ -1,4 +1,17 @@
+
+# Use inside:
+#   bash ~/gpu-experimentations/provisioning_scripts/mlir_env/mlir_env.bash $HOME/neopiler/toolkit/llvm
+export PATH="$PATH:$B"
+
 export WHERE="/home/ephemssss/neopiler"
+
+set -ux
+
+
+# How it works:
+#    llvm-config --libdir
+#          /mlir/llvm-project/build/lib
+
 
 export LD_LIBRARY_PATH=$(llvm-config --libdir):$LD_LIBRARY_PATH
 
