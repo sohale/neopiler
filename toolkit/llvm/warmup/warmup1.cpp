@@ -11,3 +11,9 @@ void processAST(clang::ASTContext &Ctx) {
 }
 
 // Possible AST nodes:  Decl, Stmt, and Expr.
+
+
+int main() {
+    clang::ASTContext *ctx = nullptr; // Dummy AST context for testing
+    processAST(*ctx);
+}

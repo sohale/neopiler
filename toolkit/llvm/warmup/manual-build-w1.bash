@@ -31,6 +31,8 @@ export PATH="$LLVM_DIR/bin:$PATH"
 #
 
 LLVMLIBDIR=$(llvm-config --libdir)
+echo "$LLVMLIBDIR == $LLVM_DIR/lib"
+LLVMINCDIR=$(llvm-config --includedir)
 
 if [ -z "${LD_LIBRARY_PATH:-}" ]; then
     export LD_LIBRARY_PATH="$LLVMLIBDIR"
